@@ -10,6 +10,27 @@ let gameOver = false;
 let cactusSpeed = 1000; // Initial speed in milliseconds
 let checkCollision;
 
+// Array of obstacle images
+const obstacles = [
+    './assets/images/obsticle-1.png',
+    './assets/images/obsticle-2.png',
+    './assets/images/obsticle-3.png',
+    './assets/images/obsticle-4.png',
+    './assets/images/obsticle-5.png'
+];
+
+// Function to update cactus image based on level
+function updateCactusImage(level) {
+    if (level >= 4) {
+        // Random obstacle for level 4 and above
+        const randomIndex = Math.floor(Math.random() * obstacles.length);
+        cactus.style.backgroundImage = `url('${obstacles[randomIndex]}')`;
+    } else {
+        // Set specific obstacle for levels 1 to 3
+        cactus.style.backgroundImage = `url('${obstacles[level - 1]}')`;
+    }
+}
+
 function jump() {
     if (isJumping) return;
     let position = 0;
@@ -51,7 +72,7 @@ function startGame() {
     gameOver = false;
     scoreElement.textContent = score;
     levelElement.textContent = level;
-    cactusSpeed = 1000; // Reset speed
+    cactusSpeed = 2200; // Reset speed
 
     // Remove the start button
     const startButton = document.getElementById('start-button');
@@ -59,8 +80,9 @@ function startGame() {
         startButton.remove();
     }
 
-    // Set initial cactus speed
+    // Set initial cactus speed and image
     setCactusSpeed(cactusSpeed);
+    updateCactusImage(level);
 
     // Check for collisions and update score
     checkCollision = setInterval(() => {
@@ -82,12 +104,13 @@ function startGame() {
             scoreElement.textContent = score;
 
             // Level up every 200 points
-            if  (700>score &&  score % 200 === 0) {
+            if (700 > score && score % 200 === 0) {
                 level++;
                 levelElement.textContent = level;
 
-                // Increase cactus speed by 1%
-                cactusSpeed *= 0.99; // Reduce time, hence faster
+                // Update cactus image and speed
+                updateCactusImage(level);
+                cactusSpeed *= 0.99; // Increase cactus speed by 1%
                 setCactusSpeed(cactusSpeed);
             }
         }

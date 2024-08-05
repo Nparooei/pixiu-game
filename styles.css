@@ -48,23 +48,25 @@ body {
     z-index: 1; /* Ensure dino appears above the background */
 }
 
-
 .cactus {
     position: absolute;
     bottom: 0;
     right: -50px;
     width: 30px;
     height: 50px;
-    background-color: #444;
-    border-radius: 5px;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    z-index: 1; /* Ensure cactus appears above the background */
 }
 
 .ground {
     position: absolute;
     bottom: 0;
     width: 100%;
-    height: 10px;
+    height: 2px;
     background-color: #333;
+    z-index: 0; /* Ensure ground appears above the background */
 }
 
 .score-level {
@@ -86,6 +88,7 @@ body {
     cursor: pointer;
     transition: background-color 0.3s ease;
     display: inline-block;
+    z-index: 1; /* Ensure button appears above the background */
 }
 
 #start-button:hover {
