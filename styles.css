@@ -7,13 +7,53 @@ body {
     margin: 0;
     background-color: #f5f5f5;
     font-family: Arial, sans-serif;
+    position: relative; /* Allows absolute positioning of child elements */
 }
 
+/* Score and Level container */
+.score-level {
+    position: absolute;
+    top: 20%; /* 20% from the top of the viewport */
+    width: 100%; /* Full width of the viewport */
+    display: flex;
+    justify-content: space-between;
+    padding: 0 20px;
+    box-sizing: border-box;
+    z-index: 2; /* Ensure it appears above other elements */
+}
+
+/* Styling for both score and level using common class names */
+.score-box,
+.level-box {
+    width: 100px; /* Set fixed width for the container */
+    height: 100px; /* Set fixed height for the container */
+    display: flex; /* Use flexbox for centering */
+    align-items: center; /* Center vertically */
+    justify-content: center; /* Center horizontally */
+    font-size: 12px; /* Adjust font size as needed */
+    color: white; /* Set the text color for contrast */
+    border-radius: 10px; /* Optional: Add rounded corners */
+    background-size: cover; /* Cover the entire container with the image */
+    background-position: center; /* Center the background image */
+    background-repeat: no-repeat; /* Prevent image from repeating */
+}
+
+.score-box {
+    background-image: url('./assets/images/score.png'); /* Set the score image */
+}
+
+.level-box {
+    background-image: url('./assets/images/level.png'); /* Set the level image */
+}
+
+/* Game container centered between score-level and start button */
 .game-container {
-    position: relative;
+    position: absolute;
+    top: 30%; /* 30% from the top of the viewport */
+    bottom: 30%; /* 30% from the bottom of the viewport */
     width: 100%;
     max-width: 600px;
-    height: 200px;
+    height: calc(100% - 60%); /* Adjust height to fit the remaining space */
     overflow: hidden;
     border: 2px solid #000;
     background-color: #fff; /* Fallback color */
@@ -70,54 +110,24 @@ body {
     z-index: 0; /* Ensure ground appears above the background */
 }
 
-.score-level {
-    position: absolute;
-    top: 10px; /* Position it near the top of the game container */
-    width: 100%; /* Take up the full width of the container */
-    display: flex; /* Use flexbox for alignment */
-    justify-content: space-between; /* Distribute items evenly with space between */
-    padding: 0 20px; /* Add padding on the sides */
-    z-index: 2; /* Ensure it appears above other elements */
-    box-sizing: border-box; /* Include padding in the width calculation */
-}
-
-/* Styling for both score and level using common class names */
-.score-box,
-.level-box {
-    width: 100px; /* Set fixed width for the container */
-    height: 100px; /* Set fixed height for the container */
-    display: flex; /* Use flexbox for centering */
-    align-items: center; /* Center vertically */
-    justify-content: center; /* Center horizontally */
-    font-size: 12px; /* Adjust font size as needed */
-    color: white; /* Set the text color for contrast */
-    border-radius: 10px; /* Optional: Add rounded corners */
-    background-size: cover; /* Cover the entire container with the image */
-    background-position: center; /* Center the background image */
-    background-repeat: no-repeat; /* Prevent image from repeating */
-}
-
-.score-box {
-    background-image: url('./assets/images/score.png'); /* Set the score image */
-}
-
-.level-box {
-    background-image: url('./assets/images/level.png'); /* Set the level image */
-}
-
-/* Styles for the start game image */
+/* Start game button */
 .start-game-image {
-    margin-top: 20px;
-    width: 100px; /* Set image width */
-    height: 100px; /* Set image height */
+    position: absolute;
+    top: 50%; /* 50% from the top of the viewport */
+    left: 50%; /* 50% from the left of the viewport */
+    width: 150px; /* Set image width */
+    height: 150px; /* Set image height */
     cursor: pointer; /* Change cursor to pointer on hover */
     transition: transform 0.3s ease; /* Smooth transition for scaling effect */
+    transform: translate(-50%, -50%); /* Center the button horizontally and vertically */
+    z-index: 2; /* Ensure it appears above other elements */
 }
 
-.start-game-image:click {
-    transform: scale(1.1); /* Scale the image slightly on hover */
+.start-game-image:active {
+    transform: scale(1.1); /* Scale the image slightly when clicked */
 }
 
+/* Cactus movement animation */
 @keyframes cactusMove {
     0% {
         left: 100%;
