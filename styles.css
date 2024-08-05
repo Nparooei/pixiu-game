@@ -36,6 +36,11 @@ body {
     background-size: cover; /* Cover the entire container with the image */
     background-position: center; /* Center the background image */
     background-repeat: no-repeat; /* Prevent image from repeating */
+    text-shadow: 
+        0.5px 0.5px 0 #000, /* Right and down shadow */
+        -0.5px -0.5px 0 #000, /* Left and up shadow */
+        0.5px -0.5px 0 #000, /* Right and up shadow */
+        -0.5px 0.5px 0 #000; /* Left and down shadow */
 }
 
 .score-box {
