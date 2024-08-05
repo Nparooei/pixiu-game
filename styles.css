@@ -16,7 +16,24 @@ body {
     height: 200px;
     overflow: hidden;
     border: 2px solid #000;
-    background-color: #fff;
+    background-color: #fff; /* Fallback color */
+}
+
+/* Overlay with 50% opacity */
+.game-container::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url('./assets/images/bg.png');
+    background-size: cover; /* Ensure the background covers the entire container */
+    background-position: center; /* Center the background image */
+    background-repeat: no-repeat; /* Prevent the image from repeating */
+    opacity: 0.5; /* Set the opacity to 50% */
+    z-index: 0; /* Place the overlay behind the game elements */
+    pointer-events: none; /* Allow clicks to pass through to the game elements */
 }
 
 .dino {
@@ -24,9 +41,13 @@ body {
     bottom: 0;
     width: 40px;
     height: 40px;
-    background-color: #333;
-    border-radius: 5px;
+    background-image: url('./assets/images/pixiu.png'); /* Set the image as the background */
+    background-size: contain; /* Ensure the image fits the element */
+    background-repeat: no-repeat; /* Prevent the image from repeating */
+    background-position: center; /* Center the image in the element */
+    z-index: 1; /* Ensure dino appears above the background */
 }
+
 
 .cactus {
     position: absolute;
