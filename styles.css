@@ -71,29 +71,51 @@ body {
 }
 
 .score-level {
-    display: flex;
-    justify-content: space-between;
-    width: 200px;
-    margin-top: 20px;
+    position: absolute;
+    top: 10px; /* Position it near the top of the game container */
+    width: 100%; /* Take up the full width of the container */
+    display: flex; /* Use flexbox for alignment */
+    justify-content: space-between; /* Distribute items evenly with space between */
+    padding: 0 20px; /* Add padding on the sides */
+    z-index: 2; /* Ensure it appears above other elements */
+    box-sizing: border-box; /* Include padding in the width calculation */
 }
 
-/* New styles for the start button */
-#start-button {
-    margin-top: 20px;
-    padding: 10px 20px;
-    font-size: 16px;
-    background-color: #4CAF50;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-    display: inline-block;
-    z-index: 1; /* Ensure button appears above the background */
+/* Styling for both score and level using common class names */
+.score-box,
+.level-box {
+    width: 100px; /* Set fixed width for the container */
+    height: 100px; /* Set fixed height for the container */
+    display: flex; /* Use flexbox for centering */
+    align-items: center; /* Center vertically */
+    justify-content: center; /* Center horizontally */
+    font-size: 12px; /* Adjust font size as needed */
+    color: white; /* Set the text color for contrast */
+    border-radius: 10px; /* Optional: Add rounded corners */
+    background-size: cover; /* Cover the entire container with the image */
+    background-position: center; /* Center the background image */
+    background-repeat: no-repeat; /* Prevent image from repeating */
 }
 
-#start-button:hover {
-    background-color: #45a049;
+.score-box {
+    background-image: url('./assets/images/score.png'); /* Set the score image */
+}
+
+.level-box {
+    background-image: url('./assets/images/level.png'); /* Set the level image */
+}
+
+/* Styles for the start game image */
+.start-game-image {
+    margin-top: 20px;
+    width: 100px; /* Set image width */
+    height: 100px; /* Set image height */
+    cursor: pointer; /* Change cursor to pointer on hover */
+    transition: transform 0.3s ease; /* Smooth transition for scaling effect */
+}
+
+.start-game-image:click {
+    transform: scale(1.1); /* Scale the image slightly on hover */
 }
 
 @keyframes cactusMove {

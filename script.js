@@ -75,7 +75,7 @@ function startGame() {
     cactusSpeed = 2000; // Reset speed to half
 
     // Remove the start button
-    const startButton = document.getElementById('start-button');
+    const startButton = document.getElementById('start-game-image');
     if (startButton) {
         startButton.remove();
     }
@@ -122,18 +122,11 @@ function setCactusSpeed(speed) {
 }
 
 function addStartButton() {
-    const button = document.createElement('button');
-    button.id = 'start-button';
-    button.textContent = 'Start Game';
-    button.style.marginTop = '20px';
-    button.style.padding = '10px 20px';
-    button.style.fontSize = '16px';
-    button.style.backgroundColor = '#4CAF50';
-    button.style.color = 'white';
-    button.style.border = 'none';
-    button.style.borderRadius = '5px';
-    button.style.cursor = 'pointer';
-    button.style.transition = 'background-color 0.3s ease';
+    const button = document.createElement('img');
+    button.id = 'start-game-image';
+    button.src = './assets/images/start-game.png';
+    button.alt = 'Start Game';
+    button.className = 'start-game-image';
 
     button.addEventListener('click', () => {
         if (gameOver || score === 0) {
@@ -148,7 +141,7 @@ function addStartButton() {
 }
 
 // Add event listener for the initial start button
-document.getElementById('start-button').addEventListener('click', () => {
+document.getElementById('start-game-image').addEventListener('click', () => {
     startGame();
 });
 

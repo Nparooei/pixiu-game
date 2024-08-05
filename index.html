@@ -7,16 +7,23 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
+    <div class="score-level">
+        <!-- Score container with a specific class for background -->
+        <div class="score-box">
+            <span id="score">0</span>
+        </div>
+        <!-- Level container with a specific class for background -->
+        <div class="level-box">
+            <span id="level">1</span>
+        </div>
+    </div>
     <div class="game-container">
         <div id="dino" class="dino"></div>
         <div id="cactus" class="cactus"></div>
         <div class="ground"></div>
     </div>
-    <div class="score-level">
-        <h2>Score: <span id="score">0</span></h2>
-        <h2>Level: <span id="level">1</span></h2>
-    </div>
-    <button id="start-button">Start Game</button>
+    <!-- Replace button with image -->
+    <img id="start-game-image" src="./assets/images/start-game.png" alt="Start Game" class="start-game-image">
     <script src="script.js"></script>
 </body>
 </html>
