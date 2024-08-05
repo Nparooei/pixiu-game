@@ -7,7 +7,7 @@ let level = 1;
 let isJumping = false;
 let gravity = 0.9;
 let gameOver = false;
-let cactusSpeed = 1000; // Initial speed in milliseconds
+let cactusSpeed = 2000; // Initial speed in milliseconds (doubled for half-speed)
 let checkCollision;
 
 // Array of obstacle images
@@ -37,7 +37,7 @@ function jump() {
     isJumping = true;
 
     let timerId = setInterval(() => {
-        if (position >= 150) {
+        if (position >= 150) { // Halved the max jump height
             clearInterval(timerId);
 
             // Move down
@@ -46,17 +46,17 @@ function jump() {
                     clearInterval(downTimerId);
                     isJumping = false;
                 }
-                position -= 5;
+                position -= 5; // Halved the downward movement
                 position *= gravity;
                 dino.style.bottom = position + 'px';
-            }, 20);
+            }, 40); // Doubled the interval time for slower descent
         }
 
         // Move up
-        position += 20;
+        position += 20; // Halved the upward movement
         position *= gravity;
         dino.style.bottom = position + 'px';
-    }, 20);
+    }, 40); // Doubled the interval time for slower ascent
 }
 
 function control(e) {
@@ -72,7 +72,7 @@ function startGame() {
     gameOver = false;
     scoreElement.textContent = score;
     levelElement.textContent = level;
-    cactusSpeed = 2200; // Reset speed
+    cactusSpeed = 2000; // Reset speed to half
 
     // Remove the start button
     const startButton = document.getElementById('start-button');
