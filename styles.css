@@ -13,7 +13,7 @@ body {
   /* Total score container */
   .total-score {
     position: absolute; /* Positioning it absolutely relative to the body */
-    top: -100px; /* Glued to the top of the screen */
+    top: -110px; /* Glued to the top of the screen */
     left: 50%; /* Center horizontally */
     transform: translateX(-50%); /* Adjust to center by its own width */
     width: 150px; /* Set width */
@@ -34,10 +34,16 @@ body {
     padding: 10px 0; /* Add padding for better spacing */
   }
   
-  #total-score-span-title,
+  #total-score-span-title {
+    color: black; /* Set text color to black */
+    margin-bottom: 5px; /* Space between "Total" and the number */
+    font-size: 5px; /* Adjust font size */
+  }
+  
   #total-score-span {
     color: black; /* Set text color to black */
-    margin: 0 5px; /* Add some spacing between text elements */
+    margin: 0; /* Ensure no extra margin */
+    font-size: 10px;
   }
   
   /* Score and Level container */
@@ -155,10 +161,6 @@ body {
     transition: transform 0.3s ease; /* Smooth transition for scaling effect */
     transform: translate(-50%, -50%); /* Center the button horizontally and vertically */
     z-index: 2; /* Ensure it appears above other elements */
-  }
-  
-  .start-game-image:active {
-    transform: scale(1.1); /* Scale the image slightly when clicked */
   }
   
   /* Cactus movement animation */
