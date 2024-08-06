@@ -8,10 +8,40 @@ body {
     background-color: #f5f5f5;
     font-family: Arial, sans-serif;
     position: relative; /* Allows absolute positioning of child elements */
-}
-
-/* Score and Level container */
-.score-level {
+  }
+  
+  /* Total score container */
+  .total-score {
+    position: absolute; /* Positioning it absolutely relative to the body */
+    top: -100px; /* Glued to the top of the screen */
+    left: 50%; /* Center horizontally */
+    transform: translateX(-50%); /* Adjust to center by its own width */
+    width: 150px; /* Set width */
+    height: 250px; /* Set height */
+    background-image: url("./assets/images/high-score.png"); /* Set the high-score image */
+    background-size: contain; /* Ensure the image fits within the element */
+    background-repeat: no-repeat; /* Prevent repeating */
+    background-position: center; /* Center the image */
+    z-index: 3; /* Make sure it appears above other elements */
+    display: flex; /* Use flexbox for centering */
+    flex-direction: column; /* Arrange children in a column */
+    justify-content: center; /* Center horizontally */
+    align-items: center; /* Center vertically */
+    color: black; /* Set text color */
+    font-size: 20px; /* Adjust font size */
+    font-weight: bold; /* Make text bold */
+    text-shadow: 0.5px 0.5px 0 #fff; /* Add subtle shadow for contrast */
+    padding: 10px 0; /* Add padding for better spacing */
+  }
+  
+  #total-score-span-title,
+  #total-score-span {
+    color: black; /* Set text color to black */
+    margin: 0 5px; /* Add some spacing between text elements */
+  }
+  
+  /* Score and Level container */
+  .score-level {
     position: absolute;
     top: 20%; /* 20% from the top of the viewport */
     width: 100%; /* Full width of the viewport */
@@ -20,11 +50,11 @@ body {
     padding: 0 20px;
     box-sizing: border-box;
     z-index: 2; /* Ensure it appears above other elements */
-}
-
-/* Styling for both score and level using common class names */
-.score-box,
-.level-box {
+  }
+  
+  /* Styling for both score and level using common class names */
+  .score-box,
+  .level-box {
     width: 100px; /* Set fixed width for the container */
     height: 100px; /* Set fixed height for the container */
     display: flex; /* Use flexbox for centering */
@@ -36,23 +66,22 @@ body {
     background-size: cover; /* Cover the entire container with the image */
     background-position: center; /* Center the background image */
     background-repeat: no-repeat; /* Prevent image from repeating */
-    text-shadow: 
-        0.5px 0.5px 0 #000, /* Right and down shadow */
-        -0.5px -0.5px 0 #000, /* Left and up shadow */
-        0.5px -0.5px 0 #000, /* Right and up shadow */
-        -0.5px 0.5px 0 #000; /* Left and down shadow */
-}
-
-.score-box {
-    background-image: url('./assets/images/score.png'); /* Set the score image */
-}
-
-.level-box {
-    background-image: url('./assets/images/level.png'); /* Set the level image */
-}
-
-/* Game container centered between score-level and start button */
-.game-container {
+    text-shadow: 0.5px 0.5px 0 #000, /* Right and down shadow */
+      -0.5px -0.5px 0 #000, /* Left and up shadow */
+      0.5px -0.5px 0 #000, /* Right and up shadow */
+      -0.5px 0.5px 0 #000; /* Left and down shadow */
+  }
+  
+  .score-box {
+    background-image: url("./assets/images/score.png"); /* Set the score image */
+  }
+  
+  .level-box {
+    background-image: url("./assets/images/level.png"); /* Set the level image */
+  }
+  
+  /* Game container centered between score-level and start button */
+  .game-container {
     position: absolute;
     top: 30%; /* 30% from the top of the viewport */
     bottom: 30%; /* 30% from the bottom of the viewport */
@@ -62,39 +91,39 @@ body {
     overflow: hidden;
     border: 2px solid #000;
     background-color: #fff; /* Fallback color */
-}
-
-/* Overlay with 50% opacity */
-.game-container::before {
-    content: '';
+  }
+  
+  /* Overlay with 50% opacity */
+  .game-container::before {
+    content: "";
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background-image: url('./assets/images/bg.png');
+    background-image: url("./assets/images/bg.png");
     background-size: cover; /* Ensure the background covers the entire container */
     background-position: center; /* Center the background image */
     background-repeat: no-repeat; /* Prevent the image from repeating */
     opacity: 0.5; /* Set the opacity to 50% */
     z-index: 0; /* Place the overlay behind the game elements */
     pointer-events: none; /* Allow clicks to pass through to the game elements */
-}
-
-.dino {
+  }
+  
+  .dino {
     position: absolute;
     bottom: 0;
     left: 30px;
     width: 40px;
     height: 40px;
-    background-image: url('./assets/images/pixiu.png'); /* Set the image as the background */
+    background-image: url("./assets/images/pixiu.png"); /* Set the image as the background */
     background-size: contain; /* Ensure the image fits the element */
     background-repeat: no-repeat; /* Prevent the image from repeating */
     background-position: center; /* Center the image in the element */
     z-index: 1; /* Ensure dino appears above the background */
-}
-
-.cactus {
+  }
+  
+  .cactus {
     position: absolute;
     bottom: 0;
     right: -50px;
@@ -104,19 +133,19 @@ body {
     background-repeat: no-repeat;
     background-position: center;
     z-index: 1; /* Ensure cactus appears above the background */
-}
-
-.ground {
+  }
+  
+  .ground {
     position: absolute;
     bottom: 0;
     width: 100%;
     height: 2px;
     background-color: #333;
     z-index: 0; /* Ensure ground appears above the background */
-}
-
-/* Start game button */
-.start-game-image {
+  }
+  
+  /* Start game button */
+  .start-game-image {
     position: absolute;
     top: 50%; /* 50% from the top of the viewport */
     left: 50%; /* 50% from the left of the viewport */
@@ -126,18 +155,19 @@ body {
     transition: transform 0.3s ease; /* Smooth transition for scaling effect */
     transform: translate(-50%, -50%); /* Center the button horizontally and vertically */
     z-index: 2; /* Ensure it appears above other elements */
-}
-
-.start-game-image:active {
+  }
+  
+  .start-game-image:active {
     transform: scale(1.1); /* Scale the image slightly when clicked */
-}
-
-/* Cactus movement animation */
-@keyframes cactusMove {
+  }
+  
+  /* Cactus movement animation */
+  @keyframes cactusMove {
     0% {
-        left: 100%;
+      left: 100%;
     }
     100% {
-        left: -50px;
+      left: -50px;
     }
-}
+  }
+  
