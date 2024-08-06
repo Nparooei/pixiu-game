@@ -37,7 +37,7 @@ body {
   #total-score-span-title {
     color: black; /* Set text color to black */
     margin-bottom: 5px; /* Space between "Total" and the number */
-    font-size: 5px; /* Adjust font size */
+    font-size: 12px; /* Adjust font size */
   }
   
   #total-score-span {
@@ -172,4 +172,32 @@ body {
       left: -50px;
     }
   }
-  
+
+  /* Explosion Container */
+.explosion {
+  position: absolute;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background-color: rgba(255, 165, 0, 0.8); /* Orange color */
+  box-shadow: 0 0 10px rgba(255, 69, 0, 0.6); /* Glow effect */
+  opacity: 0; /* Start hidden */
+  pointer-events: none; /* Allow clicks to pass through */
+  z-index: 2; /* Appear above game elements */
+}
+
+/* Explosion Animation */
+@keyframes explosionEffect {
+  0% {
+    transform: scale(0.5);
+    opacity: 0.8;
+  }
+  50% {
+    transform: scale(1.5);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(2);
+    opacity: 0;
+  }
+}

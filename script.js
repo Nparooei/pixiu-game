@@ -98,27 +98,36 @@ function startGame() {
     const cactusLeft = parseInt(
       window.getComputedStyle(cactus).getPropertyValue("left")
     );
+    const cactusWidth = cactus.offsetWidth;
+    const cactusHeight = cactus.offsetHeight;
 
     if (cactusLeft > 0 && cactusLeft < 40 && dinoBottom <= 40) {
       clearInterval(checkCollision);
 
+      // Trigger explosion at collision point
+      triggerExplosion(cactusLeft + cactusWidth / 2, dinoBottom + cactusHeight / 2);
+
       // Update the total score
       total += score;
-      totalScoreSpan.textContent = total; // Update total score display
+      totalScoreSpan.textContent = parseFloat(total/10).toFixed(4);
+      ; // Update total score display
 
       // Save the total score to local storage
       localStorage.setItem("totalScore", total);
 
       gameOver = true;
       cactus.style.animation = "none";
+      dino.style.visibility = "hidden";
 
-      // Add the start button back to the DOM
-      addStartButton();
+      // Add the start button back to the DOM after delay
+      setTimeout(() => {
+        addStartButton();
+      }, 2000); // Delay for the explosion animation
     }
 
     if (!gameOver) {
       score += level;
-      scoreElement.textContent = score;
+      scoreElement.textContent = parseFloat(score/10).toFixed(1);
 
       // Level up every 200 points
       if (3000 > score && score % 200 === 0) {
@@ -148,7 +157,7 @@ function addStartButton() {
   button.src = "./assets/images/start-game.png";
   button.alt = "Start Game";
   button.className = "start-game-image";
-
+  dino.style.visibility = "visible";
   button.addEventListener("click", () => {
     if (gameOver || score === 0) {
       // Reset game elements if the game was previously over or if it's the initial start
@@ -159,6 +168,20 @@ function addStartButton() {
   });
 
   document.body.appendChild(button);
+}
+
+// Function to trigger explosion animation
+function triggerExplosion(x, y) {
+  const explosion = document.getElementById('explosion');
+  explosion.style.left = `${x}px`;
+  explosion.style.bottom = `${y}px`;
+  explosion.style.opacity = 1; // Make it visible
+  explosion.style.animation = 'explosionEffect 2s forwards'; // Trigger the animation
+
+  setTimeout(() => {
+    explosion.style.opacity = 0; // Hide after animation
+    explosion.style.animation = 'none'; // Reset animation
+  }, 2000); // Duration of the animation
 }
 
 // Add event listener to the document for the click event to trigger jump
