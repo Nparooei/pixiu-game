@@ -1,11 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Simple Dino Game</title>
     <link rel="stylesheet" href="styles.css">
 </head>
+
 <body>
     <!-- Total score container with a specific class for styling -->
     <div class="total-score">
@@ -31,11 +33,21 @@
     </div>
     <!-- Add the new buttons -->
     <div class="action-buttons">
-        <button id="download-app-button">Download App (50000 Tokens)</button>
-        <button id="refer-friends-button">Refer to Friends (25000 Tokens)</button>
+        <a id="download-app-link" class="action-buttons-download">Download App (50000 Tokens)</a>
+        <!-- Replace refer button with a label, input, and copy link -->
+        <div class="refer-container">
+            <label for="refer-input" class="refer-label">Refer to Friends (25000 Tokens)</label>
+            <div class="refer-input-group">
+                <input type="text" id="refer-input" class="refer-input" readonly>
+                <a id="copy-refer-link" class="copy-link">Copy</a>
+            </div>
+        </div>
     </div>
+    
+    
     <!-- Replace button with image -->
     <img id="start-game-image" src="./assets/images/start-game.png" alt="Start Game" class="start-game-image">
     <script src="script.js"></script>
 </body>
+
 </html>
