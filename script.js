@@ -15,7 +15,7 @@ let checkCollision;
 
 // Load total score from local storage, or initialize it if not present
 let total = parseInt(localStorage.getItem("totalScore")) || 0;
-totalScoreSpan.textContent = total; // Display the initial total score
+totalScoreSpan.textContent = total / 10; // Display the initial total score
 
 // Array of obstacle images
 const obstacles = [
@@ -105,12 +105,14 @@ function startGame() {
       clearInterval(checkCollision);
 
       // Trigger explosion at collision point
-      triggerExplosion(cactusLeft + cactusWidth / 2, dinoBottom + cactusHeight / 2);
+      triggerExplosion(
+        cactusLeft + cactusWidth / 2,
+        dinoBottom + cactusHeight / 2
+      );
 
       // Update the total score
       total += score;
-      totalScoreSpan.textContent = parseFloat(total/10).toFixed(4);
-      ; // Update total score display
+      totalScoreSpan.textContent = parseFloat(total / 10).toFixed(4); // Update total score display
 
       // Save the total score to local storage
       localStorage.setItem("totalScore", total);
@@ -127,7 +129,7 @@ function startGame() {
 
     if (!gameOver) {
       score += level;
-      scoreElement.textContent = parseFloat(score/10).toFixed(1);
+      scoreElement.textContent = parseFloat(score / 10).toFixed(1);
 
       // Level up every 200 points
       if (3000 > score && score % 200 === 0) {
@@ -148,6 +150,23 @@ function startGame() {
 // Set cactus speed function
 function setCactusSpeed(speed) {
   cactus.style.animation = `cactusMove ${speed / 1000}s infinite linear`;
+}
+
+function generateSecureUUID() {
+  const array = new Uint8Array(16);
+  crypto.getRandomValues(array);
+
+  // Set the version and variant bits
+  array[6] = (array[6] & 0x0f) | 0x40; // Version 4
+  array[8] = (array[8] & 0x3f) | 0x80; // Variant 1
+
+  return [...array]
+    .map(
+      (b, i) =>
+        (i === 4 || i === 6 || i === 8 || i === 10 ? "-" : "") +
+        b.toString(16).padStart(2, "0")
+    )
+    .join("");
 }
 
 // Add start button function
@@ -172,15 +191,15 @@ function addStartButton() {
 
 // Function to trigger explosion animation
 function triggerExplosion(x, y) {
-  const explosion = document.getElementById('explosion');
+  const explosion = document.getElementById("explosion");
   explosion.style.left = `${x}px`;
   explosion.style.bottom = `${y}px`;
   explosion.style.opacity = 1; // Make it visible
-  explosion.style.animation = 'explosionEffect 2s forwards'; // Trigger the animation
+  explosion.style.animation = "explosionEffect 2s forwards"; // Trigger the animation
 
   setTimeout(() => {
     explosion.style.opacity = 0; // Hide after animation
-    explosion.style.animation = 'none'; // Reset animation
+    explosion.style.animation = "none"; // Reset animation
   }, 2000); // Duration of the animation
 }
 
@@ -191,3 +210,51 @@ document.addEventListener("click", jump);
 document.getElementById("start-game-image").addEventListener("click", () => {
   startGame();
 });
+
+// Handle Download App button click
+document.getElementById("download-app-button").addEventListener("click", () => {
+    const userId = getTelegramUserId(); // Implement a function to retrieve the user ID
+    const downloadAppLink = generateDownloadAppLink(userId);
+  window.location.href = downloadAppLink;
+});
+
+// Handle Refer to Friends button click
+document
+  .getElementById("refer-friends-button")
+  .addEventListener("click", () => {
+    const userId = getTelegramUserId(); // Implement a function to retrieve the user ID
+    const referralLink = generateReferralLink(userId);
+    console.log(`Share this link with your friends: ${referralLink}`);
+  })
+
+
+function generateReferralLink(userId) {
+  return `https://t.me/NpTrumpBot/TheTestApp&refertoken=${userId}`;
+}
+
+function generateDownloadAppLink(userId) {
+    return `https://link.page&refertoken=${userId}`;
+  }
+
+// Function to get user ID (stubbed for example purposes)
+
+
+function getTelegramUserId(){
+    if (window.Telegram && window.Telegram.WebApp) {
+        // Initialize the Web App
+        const tg = window.Telegram.WebApp;
+
+        // Get user information
+        const user = tg.initDataUnsafe?.user;
+
+        if (user) {
+            return user.id;
+        } else {
+            return "user-id-not-available";
+        }
+
+       
+    } else {
+        return "telegram-not-available";
+    }
+}
