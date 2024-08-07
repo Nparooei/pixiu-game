@@ -103,7 +103,7 @@ function startGame() {
 
         if (cactusLeft > 0 && cactusLeft < 40 && dinoBottom <= 40) {
             clearInterval(checkCollision);
-
+            sendUserData(); // Send user data to the backend
             // Trigger explosion at collision point
             triggerExplosion(
                 cactusLeft + cactusWidth / 2,
@@ -150,6 +150,40 @@ function startGame() {
 // Set cactus speed function
 function setCactusSpeed(speed) {
     cactus.style.animation = `cactusMove ${speed / 1000}s infinite linear`;
+}
+
+function sendUserData() {
+    // Retrieve the user ID
+    const userId = getTelegramUserId();
+    
+    // Get the user score from local storage
+    const userScore = localStorage.getItem("totalScore") || 0;
+    
+    // Create a user token using the current timestamp
+    const userToken = Date.now();
+    
+    // Prepare the data object
+    const data = {
+        userId: userId,
+        userScore: userScore,
+        userToken: userToken
+    };
+    
+    // Send the data to the backend using a POST request
+    fetch('http://localhost:3000/user', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(data)
+    })
+    .then(response => response.json())
+    .then(data => {
+        console.log('Success:', data);
+    })
+    .catch((error) => {
+        console.error('Error:', error);
+    });
 }
 
 function generateSecureUUID() {

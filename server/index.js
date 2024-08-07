@@ -1,18 +1,32 @@
-// server.js
 const express = require('express');
+const bodyParser = require('body-parser');
+const cors = require('cors');
+
 const app = express();
-const PORT = process.env.PORT || 3000;
+const port = 3000;
 
-// Middleware to parse JSON bodies
-app.use(express.json());
+// Middleware to parse JSON request bodies
+app.use(bodyParser.json());
 
-// Import user routes
-const userRoutes = require('./routes/user');
+// Enable CORS for all routes
+app.use(cors());
 
-// Use the user routes
-app.use('/api', userRoutes);
+// POST endpoint to receive user data
+app.post('/user', (req, res) => {
+    const { userId, userScore, userToken } = req.body;
+
+    // Log received data to console
+    console.log('Received user data:', {
+        userId,
+        userScore,
+        userToken
+    });
+
+    // Respond with success message
+    res.status(200).json({ message: 'Data received successfully' });
+});
 
 // Start the server
-app.listen(PORT, () => {
-  console.log(`Server is running on http://localhost:${PORT}`);
+app.listen(port, () => {
+    console.log(`Server running at http://localhost:${port}`);
 });
