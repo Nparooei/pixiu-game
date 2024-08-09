@@ -164,8 +164,8 @@ function sendUserData() {
 
   // Prepare the data object
   const data = {
-    userId: userId,
-    userScore: userScore,
+    userId: "u"+userId.toString(),
+    userScore: userScore.toString(),
     userToken: userToken.toString(),
   };
 
@@ -286,22 +286,15 @@ function generateDownloadAppLink(userId) {
 
 // Function to get user ID (stubbed for example purposes)
 function getTelegramUserId() {
-  if (window.Telegram && window.Telegram.WebApp) {
+
     const tg = window.Telegram.WebApp;
-    return JSON.stringify(tg);
-    // Initialize the Web App
-    // const tg = window.Telegram.WebApp;
 
-    // // Get user information
-    // const user = tg.initDataUnsafe?.user;
+    // Get user information
+    const user = tg.initDataUnsafe?.user;
 
-    // if (user) {
-    //   return user.id;
-    // } else {
-    //   return "user-id-not-available";
-    // }
-    Web App Telegram
-  } else {
-    return "telegram-not-available";
+    if (user) {
+      return user.id;
+    } else {
+      return "user-id-not-available";
+    }
   }
-}
