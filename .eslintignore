@@ -1,0 +1,10 @@
+# Ignore artifacts:
+.expo
+assets
+node_modules
+.eslintrc.js
+babel.config.js
+commitlint.config.js
+
+
+
